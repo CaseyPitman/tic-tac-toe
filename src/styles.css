@@ -96,6 +96,8 @@ html {
 
 .begin:hover,
 .reset:hover {
-   background-color: white;
+   background-color: tomato;
+   border:1px solid tomato;
+   color: white;
    cursor: pointer;
 }
