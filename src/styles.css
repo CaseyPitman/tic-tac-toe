@@ -1,0 +1,36 @@
+* {
+   box-sizing: border-box;
+   margin:0px;
+   padding:0px;
+}
+
+html {
+   font-size: 10px;
+}
+
+
+
+.App {
+   display: flex;
+   justify-content:center;
+   width:100%;
+   margin: 33% auto;
+}
+
+
+/* Game Board */
+
+.cell {
+
+   border:1px solid black;
+   font-size:7rem;
+   height: 100px;
+   text-align:center;
+   width: 100px;
+}
+
+
+
+
+
+

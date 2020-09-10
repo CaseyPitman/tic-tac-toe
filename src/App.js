@@ -1,24 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table className = 'gameBoard' cellSpacing = '0'>
+        <tr className = 'title' >
+          <th className = 'title-text' colSpan = '3'>Tic Tac Toe</th>
+        </tr>
+        <tr className = 'row-0'>
+          <td className = 'cell 0-0'>X</td>
+          <td className = 'cell 0-1'>O</td>
+          <td className = 'cell 0-2'>X</td>
+        </tr>
+        <tr className = 'row-1'>
+          <td className = 'cell 1-0'>X</td>
+          <td className = 'cell 1-1'>O</td>
+          <td className = 'cell 1-2'>X</td>
+        </tr>
+        <tr className = 'row-2'>
+          <td className = 'cell 2-0'>X</td>
+          <td className = 'cell 2-1'>O</td>
+          <td className = 'cell 2-2'>X</td>
+        </tr>
+        
+      </table>
     </div>
   );
 }
