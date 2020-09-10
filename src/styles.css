@@ -38,14 +38,14 @@ html {
 }
 
 .title, 
-.footer{
+.turn-tracker{
    background-color: rgb(66,66,66);
    color: white;
    font-size: 3rem;
 }
 
 .title-text, 
-.footer-text {
+.turn-tracker-text {
    padding: 10px;
 }
 
@@ -68,6 +68,7 @@ html {
 }
 .empty:hover {
    background-color: white;
+   cursor: pointer;
 }
 
 .win {
@@ -80,6 +81,7 @@ html {
    width: 100%;
 }
 
+.begin,
 .reset {
    border:1px solid rgb(66,66,66);
    color: rgb(66,66,66);
@@ -92,6 +94,8 @@ html {
    width: 300px;
 }
 
+.begin:hover,
 .reset:hover {
    background-color: white;
+   cursor: pointer;
 }
