@@ -64,7 +64,7 @@ html {
 }
 
 .empty {
-   background-color:rgb(255, 255, 255, 0.75);
+   background-color:rgb(255, 255, 255, 0.5);
 }
 .empty:hover {
    background-color: white;
@@ -81,12 +81,11 @@ html {
    width: 100%;
 }
 
-.begin,
-.reset {
+.button {
    border:1px solid rgb(66,66,66);
    color: rgb(66,66,66);
    text-align:center;
-   background-color: rgb(255, 255, 255, 0.75);
+   background-color: rgb(255, 255, 255, 0.5);
    margin:15px auto;
    width:300px;
    font-size: 3.2rem;
@@ -94,10 +93,11 @@ html {
    width: 300px;
 }
 
-.begin:hover,
-.reset:hover {
+.button:hover {
    background-color: tomato;
    border:1px solid tomato;
    color: white;
    cursor: pointer;
 }
+
+

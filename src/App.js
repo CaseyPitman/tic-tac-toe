@@ -11,7 +11,8 @@ class App extends Component {
 
     this.state = {
       board: initialBoard,
-      visibleButton: 'begin',
+      visibleButton: 'begin', //or reset or quit playing
+      currentTurn: 'none',    //or 'X' or 'O'
       winStatus: false
     }
   }
@@ -24,10 +25,11 @@ class App extends Component {
 
         <Board 
           boardStatus = {this.state.board}
+          currentTurn = {this.state.currentTurn}
         />
 
 
-        <Button />
+        <Button type = {this.state.visibleButton}/>
 
 
       </div>
