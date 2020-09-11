@@ -7,6 +7,11 @@ const initialBoard = [
      letter: 'none' //or X or O
    },
    {
+    cell: 1,
+    status: 'empty',  //or occupied or win
+    letter: 'none' //or X or O
+   },
+   {
      cell: 2,
      status: 'empty',  
      letter: 'none' 

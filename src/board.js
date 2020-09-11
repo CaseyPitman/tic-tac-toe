@@ -7,7 +7,18 @@ class Board extends Component {
 
    render(){ 
 
-   console.log(this.props.currentTurn)
+  //  console.log(this.props.currentTurn)
+
+   let cells = this.props.boardStatus.map((cur, ind) => {
+    return(
+    <Cell 
+    key = {this.props.boardStatus[ind].cell} 
+    status = {this.props.boardStatus[ind].status} 
+    letter = {this.props.boardStatus[ind].letter}/>)
+  });
+
+  //  console.log('cells', cells[8])
+
 
       return(
 
@@ -17,22 +28,25 @@ class Board extends Component {
               <th className = 'title-text' colSpan = '3'>Tic Tac Toe</th>
             </tr>
             <tr className = 'row-0'>
-              <Cell 
+              {/* <Cell 
                 key = {this.props.boardStatus[0].cell} 
                 status = {this.props.boardStatus[0].status} 
                 letter = {this.props.boardStatus[0].letter}/>
               <Cell />
-              <Cell />              
+              <Cell />               */}
+              {cells[0]}
+              {cells[1]}
+              {cells[2]}
             </tr>
             <tr className = 'row-1'>
-              <Cell />
-              <Cell />
-              <Cell /> 
+              {cells[3]}
+              {cells[4]}
+              {cells[5]}
             </tr>
             <tr className = 'row-2'>
-              <Cell />
-              <Cell />
-              <Cell /> 
+              {cells[6]}
+              {cells[7]}
+              {cells[8]} 
             </tr> 
             <Tracker 
               currentTurn = {this.props.currentTurn}
