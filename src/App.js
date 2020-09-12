@@ -46,7 +46,15 @@ class App extends Component {
     // console.log('check for win');
     // console.log('combos', winCombos)
 
-    console.log('id and letter', id, letter);
+    // console.log('id and letter', id, letter);
+    //testing purposes
+    if (this.state.turnCount === 8){
+      this.setState({
+        winStatus: true, 
+        gameStatus: 'win'
+      })
+      return true;
+    }
     //Pass in last clicked and see if you can work from there instead of checking the entire thing. 
     //Also consider filtering down to all of whatever letter you are dealing with.
   }
@@ -76,19 +84,23 @@ class App extends Component {
       // console.log('no possible win yet')
     } else {
       let letter = this.state.gameStatus;
-      this.checkWin(id, letter);  //if true set state
-    }
+      this.checkWin(id, letter)
   
-    console.log ('turncount', this.state.turnCount);
+    }  //if true set state
+
+    //I THINK I NEED A WAY TO MAKE IT PAUSE HERE.
+    
+  
+    console.log("win status", this.state.winStatus)
+    console.log("gameStatus", this.state.gameStatus)
     //If no win, change turn tracker 
-    if (!this.state.winStatus || this.state.turnCount < 9){
+    if (!this.state.winStatus && this.state.turnCount < 9){
       let turn = (this.state.gameStatus === 'X') ? 'O' : 'X';
       let newTurnCount = this.state.turnCount + 1;
       this.setState({
         gameStatus: turn,
         turnCount: newTurnCount
         });
-      
     }
     
     if(!this.state.winStatus && this.state.turnCount === 9){
@@ -98,7 +110,18 @@ class App extends Component {
         gameStatus: 'draw'
       });
     }
+
+    //for testing purposes
+    if (this.state.WinStatus){
+      console.log('winner!')
+    }
+
   }
+
+  componentDidUpdate(){
+    console.log(this.state)
+  }
+
 
 
 
