@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import initialBoard from './initialBoardState'
 import Board from './board'
 import Button from './buttons'
+import winCombos from './winCombos'
 
 
 let initialState = {
@@ -43,7 +44,9 @@ class App extends Component {
   //Check for win
   checkWin = () => {
     console.log('check for win');
-    
+    console.log('combos', winCombos)
+    //Pass in last clicked and see if you can work from there instead of checking the entire thing. 
+    //Also consider filtering
   }
 
   //User clicks on cell
