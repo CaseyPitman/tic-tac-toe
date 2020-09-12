@@ -6,7 +6,7 @@ let Cell = (props) => {
 
 
 //clickHandler to change state when clicking
-   let handleClick =() => {
+   let handleClick =(event) => {
       // console.log(props.inProgress)
 
       //If game hasn't started, you can't click the cell
@@ -14,9 +14,9 @@ let Cell = (props) => {
          alert('not yet');
          return;
       } else {
+         //Identifies cell clicked
+         let id = props.id;
          props.updateCell();
-         //else go to change cell function in App.js
-
       }
    }
 
@@ -27,7 +27,7 @@ let Cell = (props) => {
       currentClass += ' occupied'
    } else if (props.status === 'win'){
       currentClass += ' win'
-   } else {
+   } else if (props.inProgress){
       currentClass += ' empty'
    }
 
