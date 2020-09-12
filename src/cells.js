@@ -19,7 +19,6 @@ let Cell = (props) => {
       currentClass += ' empty'
    }
 
-
    return (
 
     

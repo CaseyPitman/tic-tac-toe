@@ -5,10 +5,12 @@ let Tracker = (props) => {
 
    let text = 'Let\'s Play';
      
-   if (props.currentTurn === 'X'){
+   if (props.gameStatus === 'X'){
       text = `X's turn`;
-   } else if (props.currentTurn === 'O') {
+   } else if (props.gameStatus === 'O') {
       text = `O's turn`;
+   } else if (props.gameStatus === 'win'){
+      text = 'Game Over'
    }
 
 

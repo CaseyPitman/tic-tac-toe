@@ -6,16 +6,15 @@ let Button  = (props) => {
 
    //Click Handler
    let clickHandler = () => {
-      alert('button clicked')
-      //Change button type in state
-      //Change text in board footer
+      // Changes button function dependent on stage in game
+      props.changeButton(props.gameStatus);
    }
 
    //Determine Button to show based on context
 
    let buttonText = '';
    // console.log(props.type)
-   if (props.type === 'begin'){
+   if (props.type === 'init'){
       buttonText = 'Start';
    } else if (props.type === 'reset'){
       buttonText = 'Play Again';

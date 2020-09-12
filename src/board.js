@@ -49,7 +49,7 @@ class Board extends Component {
               {cells[8]} 
             </tr> 
             <Tracker 
-              currentTurn = {this.props.currentTurn}
+              gameStatus = {this.props.gameStatus}
             />
           </tbody>
         </table>
