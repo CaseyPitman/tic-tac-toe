@@ -9,6 +9,7 @@ let initialState = {
   board: initialBoard,
   visibleButton: 'init', //or reset or quit playing
   gameStatus: 'init',    //or 'X' or 'O', or win
+  inProgress: false,
   winStatus: false
 }
 
@@ -18,7 +19,6 @@ class App extends Component {
 
     this.state = initialState;
   }
-
 
   //reset
   reset = () => {
@@ -31,13 +31,26 @@ class App extends Component {
     if (stage === 'init') {
       this.setState({
         visibleButton: 'quit', 
-        gameStatus: 'X'
+        gameStatus: 'X',
+        inProgress: true
       });
     } else if (stage === 'X' || stage === 'O' || stage === 'win'){
         this.reset();
     }
-
   }
+
+  //User clicks on cell
+
+  updateCell = () => {
+    alert('changing the cell')
+    //This one does a lot
+    //Changes cell to occupied
+    //Changes cell to include proper letter
+    //checks for win
+      //if win then ends game and all that entails
+    //Switches game status between player turns
+  }
+
 
 
   render (){
@@ -47,7 +60,9 @@ class App extends Component {
 
         <Board 
           boardStatus = {this.state.board}
-          gameStatus = {this.state.gameStatus} />
+          gameStatus = {this.state.gameStatus}
+          inProgress = {this.state.inProgress}
+          updateCell = {this.updateCell} />
 
 
         <Button 

@@ -3,10 +3,22 @@ import React from 'react'
 
 let Cell = (props) => {
 
-   //console.log('props', props.status);
+
 
 //clickHandler to change state when clicking
+   let handleClick =() => {
+      // console.log(props.inProgress)
 
+      //If game hasn't started, you can't click the cell
+      if (!props.inProgress){
+         alert('not yet');
+         return;
+      } else {
+         props.updateCell();
+         //else go to change cell function in App.js
+
+      }
+   }
 
 
 
@@ -23,7 +35,7 @@ let Cell = (props) => {
 
     
 
-      <td className = {currentClass}></td>
+      <td className = {currentClass} onClick = {handleClick}></td>
    )
 
 }

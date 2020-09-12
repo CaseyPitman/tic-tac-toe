@@ -5,7 +5,7 @@ import React from 'react';
 let Button  = (props) => {
 
    //Click Handler
-   let clickHandler = () => {
+   let handleClick = () => {
       // Changes button function dependent on stage in game
       props.changeButton(props.gameStatus);
    }
@@ -26,7 +26,7 @@ let Button  = (props) => {
    return(
 
       <div className = 'button-div'>
-         <button className = 'button' onClick = {clickHandler}>{buttonText}</button>
+         <button className = 'button' onClick = {handleClick}>{buttonText}</button>
       </div>
    )
 }

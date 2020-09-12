@@ -13,8 +13,11 @@ class Board extends Component {
     return(
     <Cell 
     key = {this.props.boardStatus[ind].cell} 
+    id = {this.props.boardStatus[ind].cell}
     status = {this.props.boardStatus[ind].status} 
-    letter = {this.props.boardStatus[ind].letter}/>)
+    letter = {this.props.boardStatus[ind].letter}
+    inProgress = {this.props.inProgress}
+    updateCell = {this.props.updateCell}/>)
   });
 
   //  console.log('cells', cells[8])
