@@ -18,7 +18,8 @@ let Button  = (props) => {
       buttonText = 'Start';
    } else if (props.type === 'reset'){
       buttonText = 'Play Again';
-   } else {
+   } 
+   else {
       buttonText = 'Quit';
    }
 

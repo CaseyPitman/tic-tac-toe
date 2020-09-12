@@ -36,17 +36,19 @@ class App extends Component {
         gameStatus: 'X',
         inProgress: true
       });
-    } else if (stage === 'X' || stage === 'O' || stage === 'win'){
+    } else if (stage === 'X' || stage === 'O' || stage === 'win' || stage ==='draw'){
         this.reset();
     }
   }
 
   //Check for win
-  checkWin = () => {
-    console.log('check for win');
-    console.log('combos', winCombos)
+  checkWin = (id, letter) => {
+    // console.log('check for win');
+    // console.log('combos', winCombos)
+
+    console.log('id and letter', id, letter);
     //Pass in last clicked and see if you can work from there instead of checking the entire thing. 
-    //Also consider filtering
+    //Also consider filtering down to all of whatever letter you are dealing with.
   }
 
   //User clicks on cell
@@ -70,29 +72,32 @@ class App extends Component {
 
     //Check to see if game has been won (if) update winStatus check, but only if enough plays have been made
 
-    if (this.state.turnCount === 9){
-      alert('Draw');
-    } else if (this.state.turnCount < 5){
-      console.log('no possible win yet')
-    } else (
-      this.checkWin()
-    )
+    if (this.state.turnCount < 5){
+      // console.log('no possible win yet')
+    } else {
+      let letter = this.state.gameStatus;
+      this.checkWin(id, letter);  //if true set state
+    }
   
-
+    console.log ('turncount', this.state.turnCount);
     //If no win, change turn tracker 
-    if (!this.state.winStatus){
-     let turn = (this.state.gameStatus === 'X') ? 'O' : 'X';
-     let newTurnCount = this.state.turnCount + 1;
-     this.setState({
-      gameStatus: turn,
-      turnCount: newTurnCount
-    });
-
-    } else (
-      alert('game is over')
-    )
-
+    if (!this.state.winStatus || this.state.turnCount < 9){
+      let turn = (this.state.gameStatus === 'X') ? 'O' : 'X';
+      let newTurnCount = this.state.turnCount + 1;
+      this.setState({
+        gameStatus: turn,
+        turnCount: newTurnCount
+        });
+      
+    }
     
+    if(!this.state.winStatus && this.state.turnCount === 9){
+      console.log('draw');
+      this.setState({
+        visibleButton: 'reset',
+        gameStatus: 'draw'
+      });
+    }
   }
 
 

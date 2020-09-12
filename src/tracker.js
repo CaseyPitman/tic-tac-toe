@@ -10,7 +10,10 @@ let Tracker = (props) => {
    } else if (props.gameStatus === 'O') {
       text = `O's turn`;
    } else if (props.gameStatus === 'win'){
-      text = 'Game Over'
+      text = 'Game Over';
+   } else if (props.gameStatus === 'draw'){
+      console.log('here!')
+      text = 'Draw';
    }
 
 
