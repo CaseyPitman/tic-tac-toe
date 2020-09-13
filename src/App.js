@@ -5,7 +5,7 @@ import Board from './board'
 import Button from './buttons'
 import winCombos from './winCombos'
 
-
+//Beginning state
 let initialState = {
   board: initialBoard,
   visibleButton: 'init', //or reset or quit playing
@@ -23,13 +23,12 @@ class App extends Component {
     this.state = initialState;
   }
 
-  //reset
+  //Resets game to initial state
   reset = () => {
     this.setState(initialState)
   }
 
   //Change button based on stage of the game
-
   changeButton = (stage) => {
     if (stage === 'init') {
       this.setState({
@@ -44,43 +43,24 @@ class App extends Component {
 
   // //Check for win
   checkWin = (id, letter) => {
-   // console.log('combos', winCombos)
-    // console.log(`id: ${id} | letter: ${letter} | turn count: ${this.state.turnCount}`);
 
     //Filter possible win combos by ones that include last clicked cell
     let posWins = winCombos.filter(combo => combo.includes(id));
 
-    // console.log(posWins);
-
-    //console.log(this.state.board);
-
     //Filter an array of the cells that contain the last letter clicked
     let currentLetterCells = this.state.board.filter(cur => cur.letter === letter);
-    //Map to create an array of indices that are the current letter
+
+    //Map to create an array of indices that are marked with the current letter
     let player = currentLetterCells.map(cur => cur.cell);
 
-   
-
-    // console.log(`player:`)
-    // console.log(player);
-
-    //Map remaining possible win combos to find one that includes 
-
-    //check, checkAgainst
-
+    //Check to see if any of the win combos are wholly included in the 
+    //list of cells containing the current letter 
     let check = posWins.map((cur) => {
       return cur.every(el => player.includes(el));
     })
 
-
-    //console.log(check);
-
+    //Isolate the winning combination of cells.
     let winIdx = check.indexOf(true);
-
-    // console.log(winIdx);
-    // console.log('winning streak');
-    // console.log(posWins[winIdx]); 
-
     let winningCells = posWins[winIdx];
 
     //A win has been found
@@ -88,45 +68,30 @@ class App extends Component {
       this.setState({winStatus: true});
     }
 
-    //There is a win
+    //There is a win, then set the state to reflect this
     if (this.state.winStatus) {
-      // console.log(`${letter} wins`);
-      console.log('winning cells');
-      console.log(winningCells);
-      
-      //Filter board down to winning cells
-    let matchWinCells = (cell) =>{ 
-      if (!winningCells.includes(cell.cell)){
-        return cell;
-      } else { 
-        //Change cell letter and background
-        return {
-          ...cell,
-          status: 'win'
+      //Change the winning cells to reflect win in state
+      let matchWinCells = (cell) =>{ 
+        if (!winningCells.includes(cell.cell)){
+          return cell;
+        } else { 
+          //Change cell letter and background
+          return {
+            ...cell,
+            status: 'win'
+          }
         }
       }
-    }
 
-    let winningBoard = this.state.board.map(matchWinCells);
-
-    console.log(winningBoard);
-
-     // console.log(winningBoard);
-
+      let winningBoard = this.state.board.map(matchWinCells);
 
       this.setState({
-        winner: letter,
-        inProgress:false,
-        gameStatus: 'win' ,
-        visibleButton: 'reset',
-        board: winningBoard      //Make cells unclickable
+        winner: letter,           //Set winner
+        inProgress:false,         //End game
+        gameStatus: 'win' ,       //Set game status as win
+        visibleButton: 'reset',   //Set button to reset game
+        board: winningBoard       //Update to final board
       })
-
-      //Set button to reset
-      //Set winning squares status to win for red background
-      //Set tracker to tell who has won
-      
-
     }
 
 
@@ -140,9 +105,9 @@ class App extends Component {
     }
   }
 
-  //User clicks on cell
-
+  //User clicks on cell during game play
   updateCell = async (id) => {
+    //Identify and update clicked cell.
     let matchID = (cell) => {
       if (cell.cell !== id){
         return cell;
@@ -156,53 +121,43 @@ class App extends Component {
       }
     }
 
+    //Update current turn and turn counter
     let letter = this.state.gameStatus;
     let updatedCells = this.state.board.map(matchID);
     let turn = (this.state.gameStatus === 'X') ? 'O' : 'X';
     let newTurnCount = this.state.turnCount + 1;
     
+    //Update board
     await this.setState({
       board: updatedCells,
       gameStatus: turn,
       turnCount: newTurnCount
     });
 
+    //Check to see if the game has been won
     this.checkWin(id, letter);
-
   }
-  
-
-  // componentDidUpdate(){
-  //   console.log(this.state)
-  // }
-
-
-
-
+ 
   render (){
 
     return (
       <div className="App">
-
         <Board 
           boardStatus = {this.state.board}
           gameStatus = {this.state.gameStatus}
           inProgress = {this.state.inProgress}
           updateCell = {this.updateCell}
-          winner = {this.state.winner} />
-
+          winner = {this.state.winner} 
+        />
 
         <Button 
-        type = {this.state.visibleButton}
-        gameStatus = {this.state.gameStatus}
-        changeButton = {this.changeButton} />
-
-
+          type = {this.state.visibleButton}
+          gameStatus = {this.state.gameStatus}
+          changeButton = {this.changeButton} 
+        />
       </div>
     );
   }
-
-
 }
 
 export default App;

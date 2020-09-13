@@ -8,8 +8,8 @@ const initialBoard = [
    },
    {
     cell: 1,
-    status: 'empty',  //or occupied or win
-    letter: 'none' //or X or O
+    status: 'empty', 
+    letter: 'none' 
    },
    {
      cell: 2,
