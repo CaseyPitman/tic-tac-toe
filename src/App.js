@@ -12,7 +12,8 @@ let initialState = {
   gameStatus: 'init',    //or 'X' or 'O', or win
   inProgress: false,
   turnCount: 0,
-  winStatus: false
+  winStatus: false,
+  winner: ''
 }
 
 class App extends Component {
@@ -89,13 +90,42 @@ class App extends Component {
 
     //There is a win
     if (this.state.winStatus) {
-      console.log(`${letter} wins`);
+      // console.log(`${letter} wins`);
       console.log('winning cells');
       console.log(winningCells);
+      
+      //Filter board down to winning cells
+    let matchWinCells = (cell) =>{ 
+      if (!winningCells.includes(cell.cell)){
+        return cell;
+      } else { 
+        //Change cell letter and background
+        return {
+          ...cell,
+          status: 'win'
+        }
+      }
+    }
+
+    let winningBoard = this.state.board.map(matchWinCells);
+
+    console.log(winningBoard);
+
+     // console.log(winningBoard);
+
+
+      this.setState({
+        winner: letter,
+        inProgress:false,
+        gameStatus: 'win' ,
+        visibleButton: 'reset',
+        board: winningBoard      //Make cells unclickable
+      })
+
       //Set button to reset
       //Set winning squares status to win for red background
       //Set tracker to tell who has won
-      //Make squares unclickable
+      
 
     }
 
@@ -158,7 +188,8 @@ class App extends Component {
           boardStatus = {this.state.board}
           gameStatus = {this.state.gameStatus}
           inProgress = {this.state.inProgress}
-          updateCell = {this.updateCell} />
+          updateCell = {this.updateCell}
+          winner = {this.state.winner} />
 
 
         <Button 

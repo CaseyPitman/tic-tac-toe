@@ -30,6 +30,7 @@ let Cell = (props) => {
       letter = props.letter;
    } else if (props.status === 'win'){
       currentClass += ' win'
+      letter = props.letter;
    } else if (props.inProgress){
       currentClass += ' empty'
    }

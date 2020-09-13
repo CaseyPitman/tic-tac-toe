@@ -7,7 +7,7 @@ class Board extends Component {
 
    render(){ 
 
-  //  console.log(this.props.currentTurn)
+  
 
    let cells = this.props.boardStatus.map((cur, ind) => {
     return(
@@ -53,6 +53,7 @@ class Board extends Component {
             </tr> 
             <Tracker 
               gameStatus = {this.props.gameStatus}
+              winner = {this.props.winner}
             />
           </tbody>
         </table>
