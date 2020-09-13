@@ -44,29 +44,54 @@ class App extends Component {
   // //Check for win
   checkWin = (id, letter) => {
    // console.log('combos', winCombos)
-    console.log(`id: ${id} | letter: ${letter} | turn count: ${this.state.turnCount}`);
+    // console.log(`id: ${id} | letter: ${letter} | turn count: ${this.state.turnCount}`);
 
     //Filter possible win combos by ones that include last clicked cell
-    let checkTheseCombosByCell = winCombos.filter(combo => combo.includes(id));
+    let posWins = winCombos.filter(combo => combo.includes(id));
 
-    console.log(checkTheseCombosByCell);
+    // console.log(posWins);
 
     //console.log(this.state.board);
 
     //Filter an array of the cells that contain the last letter clicked
     let currentLetterCells = this.state.board.filter(cur => cur.letter === letter);
     //Map to create an array of indices that are the current letter
-    currentLetterCells = currentLetterCells.map(cur => cur.cell);
-    
+    let player = currentLetterCells.map(cur => cur.cell);
+
    
 
-    console.log(currentLetterCells);
+    // console.log(`player:`)
+    // console.log(player);
+
+    //Map remaining possible win combos to find one that includes 
+
+    //check, checkAgainst
+
+    let check = posWins.map((cur) => {
+      return cur.every(el => player.includes(el));
+    })
 
 
+    //console.log(check);
+
+    let winIdx = check.indexOf(true);
+
+    // console.log(winIdx);
+    // console.log('winning streak');
+    // console.log(posWins[winIdx]); 
+
+    let winningCells = posWins[winIdx];
+
+    //A win has been found
+    if (check.includes(true)){
+      this.setState({winStatus: true});
+    }
 
     //There is a win
     if (this.state.winStatus) {
       console.log(`${letter} wins`);
+      console.log('winning cells');
+      console.log(winningCells);
       //Set button to reset
       //Set winning squares status to win for red background
       //Set tracker to tell who has won

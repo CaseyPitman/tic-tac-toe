@@ -12,7 +12,6 @@ let Tracker = (props) => {
    } else if (props.gameStatus === 'win'){
       text = 'Game Over';
    } else if (props.gameStatus === 'draw'){
-      console.log('here!')
       text = 'Draw';
    }
 
