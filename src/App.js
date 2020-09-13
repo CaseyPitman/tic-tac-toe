@@ -43,16 +43,26 @@ class App extends Component {
 
   // //Check for win
   checkWin = (id, letter) => {
-    // console.log('combos', winCombos)
+   // console.log('combos', winCombos)
+    console.log(`id: ${id} | letter: ${letter} | turn count: ${this.state.turnCount}`);
 
+    //Filter possible win combos by ones that include last clicked cell
+    let checkTheseCombosByCell = winCombos.filter(combo => combo.includes(id));
+
+    console.log(checkTheseCombosByCell);
+
+    //console.log(this.state.board);
+
+    //Filter an array of the cells that contain the last letter clicked
+    let currentLetterCells = this.state.board.filter(cur => cur.letter === letter);
+    //Map to create an array of indices that are the current letter
+    currentLetterCells = currentLetterCells.map(cur => cur.cell);
+    
    
-    //Pass in last clicked and see if you can work from there instead of checking the entire thing. 
-    //Also consider filtering down to all of whatever letter you are dealing with.
 
-    // Testing
-    if (this.state.turnCount === 4){
-      this.setState({winStatus: true})
-    }
+    console.log(currentLetterCells);
+
+
 
     //There is a win
     if (this.state.winStatus) {
