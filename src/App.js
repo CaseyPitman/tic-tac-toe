@@ -11,7 +11,7 @@ let initialState = {
   visibleButton: 'init', //or reset or quit playing
   gameStatus: 'init',    //or 'X' or 'O', or win
   inProgress: false,
-  turnCount: 1,
+  turnCount: 0,
   winStatus: false
 }
 
@@ -41,27 +41,43 @@ class App extends Component {
     }
   }
 
-  //Check for win
+  // //Check for win
   checkWin = (id, letter) => {
-    // console.log('check for win');
     // console.log('combos', winCombos)
 
-    // console.log('id and letter', id, letter);
-    //testing purposes
-    if (this.state.turnCount === 8){
-      this.setState({
-        winStatus: true, 
-        gameStatus: 'win'
-      })
-      return true;
-    }
+   
     //Pass in last clicked and see if you can work from there instead of checking the entire thing. 
     //Also consider filtering down to all of whatever letter you are dealing with.
+
+    // Testing
+    if (this.state.turnCount === 4){
+      this.setState({winStatus: true})
+    }
+
+    //There is a win
+    if (this.state.winStatus) {
+      console.log(`${letter} wins`);
+      //Set button to reset
+      //Set winning squares status to win for red background
+      //Set tracker to tell who has won
+      //Make squares unclickable
+
+    }
+
+
+    //If board is filled in and nobody has won, display a draw.
+    if (this.state.turnCount === 9 && !this.state.winStatus){
+      //Sets button to 'play again' and tracker to 'draw'
+      this.setState({
+        visibleButton: 'reset',
+        gameStatus: 'draw'
+      });
+    }
   }
 
   //User clicks on cell
 
-  updateCell = (id) => {
+  updateCell = async (id) => {
     let matchID = (cell) => {
       if (cell.cell !== id){
         return cell;
@@ -75,52 +91,25 @@ class App extends Component {
       }
     }
 
+    let letter = this.state.gameStatus;
     let updatedCells = this.state.board.map(matchID);
-    this.setState({board: updatedCells});
-
-    //Check to see if game has been won (if) update winStatus check, but only if enough plays have been made
-
-    if (this.state.turnCount < 5){
-      // console.log('no possible win yet')
-    } else {
-      let letter = this.state.gameStatus;
-      this.checkWin(id, letter)
-  
-    }  //if true set state
-
-    //I THINK I NEED A WAY TO MAKE IT PAUSE HERE.
+    let turn = (this.state.gameStatus === 'X') ? 'O' : 'X';
+    let newTurnCount = this.state.turnCount + 1;
     
-  
-    console.log("win status", this.state.winStatus)
-    console.log("gameStatus", this.state.gameStatus)
-    //If no win, change turn tracker 
-    if (!this.state.winStatus && this.state.turnCount < 9){
-      let turn = (this.state.gameStatus === 'X') ? 'O' : 'X';
-      let newTurnCount = this.state.turnCount + 1;
-      this.setState({
-        gameStatus: turn,
-        turnCount: newTurnCount
-        });
-    }
-    
-    if(!this.state.winStatus && this.state.turnCount === 9){
-      console.log('draw');
-      this.setState({
-        visibleButton: 'reset',
-        gameStatus: 'draw'
-      });
-    }
+    await this.setState({
+      board: updatedCells,
+      gameStatus: turn,
+      turnCount: newTurnCount
+    });
 
-    //for testing purposes
-    if (this.state.WinStatus){
-      console.log('winner!')
-    }
+    this.checkWin(id, letter);
 
   }
+  
 
-  componentDidUpdate(){
-    console.log(this.state)
-  }
+  // componentDidUpdate(){
+  //   console.log(this.state)
+  // }
 
 
 
