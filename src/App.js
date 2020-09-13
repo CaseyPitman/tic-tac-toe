@@ -97,8 +97,17 @@ class App extends Component {
 
     //If board is filled in and nobody has won, display a draw.
     if (this.state.turnCount === 9 && !this.state.winStatus){
+      //Turns all cells red
+      let drawBoard = this.state.board.map((cell) => {
+        return {
+          ...cell,
+          status: 'win' //Turns all cell backgrounds red
+        }
+      })
+
       //Sets button to 'play again' and tracker to 'draw'
       this.setState({
+        board: drawBoard,
         visibleButton: 'reset',
         gameStatus: 'draw'
       });
