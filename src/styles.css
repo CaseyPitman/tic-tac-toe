@@ -20,7 +20,7 @@ html {
    justify-content:center;
    flex-flow: row wrap;
    width:100%;
-   margin: 15% auto;
+   margin: 15% auto 0;
 }
 
 
@@ -99,3 +99,8 @@ html {
 }
 
 
+@media only screen and (min-width: 1400px){
+   .App {
+      margin: 10% auto 0;
+   }
+}
